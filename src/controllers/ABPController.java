@@ -19,6 +19,7 @@ import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import javax.swing.*;
+import entities.Person;
 
 /**
  *
@@ -28,7 +29,7 @@ public class ABPController {
 
     private AuBonPainPanel abp;
     private Timer gameTimer;
-    private Customer student;
+    private Person character;
     private CharacterMovement charMovement;
     private FoodStations stations;
     private Randomize randomize;
@@ -36,13 +37,15 @@ public class ABPController {
     private Inventory inventory;
     private CharacterInventory charInventory;
     private TestFrame testFrame;
+    private CharacterSprite sprite;
 
     public ABPController() throws Exception {
         testFrame = new TestFrame();
-        student = new Customer(testFrame.getSize());
+        character = new Person("Maxwell" ,"Kosabutski" , 21);
+        sprite = character.getSprite();
         charMovement = new CharacterMovement();
         stations = new FoodStations();
-        abp = new AuBonPainPanel(student, charMovement);
+        abp = new AuBonPainPanel(sprite, charMovement);
         abp.setFocusable(true);
         randomize = new Randomize();
         menuPanel = new MenuPanel();
@@ -213,54 +216,54 @@ public class ABPController {
             if (inventory != null) {
                 inventory.dispose();
             }
-            int oldX = student.x;
-            int oldY = student.y;
+            int oldX = sprite.x;
+            int oldY = sprite.y;
 
             if (ke.getKeyCode() == KeyEvent.VK_RIGHT || ke.getKeyCode() == KeyEvent.VK_D) {
                 if (charMovement.getFrame() < 5) {
-                    charMovement.setAnimation(student.getAnimation()[0]);
+                    charMovement.setAnimation(sprite.getAnimation()[0]);
                     charMovement.setFrame(charMovement.getFrame() + 1);
                 } else if (charMovement.getFrame() >= 5 && charMovement.getFrame() < 10) {
-                    charMovement.setAnimation(student.getAnimation()[1]);
+                    charMovement.setAnimation(sprite.getAnimation()[1]);
                     charMovement.setFrame(charMovement.getFrame() + 1);
                 } else if (charMovement.getFrame() > 9) {
                     charMovement.setFrame(0);
                 }
-                student.x = student.x + (int) tempLeftRight;
+                sprite.x = sprite.x + (int) tempLeftRight;
             } else if (ke.getKeyCode() == KeyEvent.VK_LEFT || ke.getKeyCode() == KeyEvent.VK_A) {
 
                 if (charMovement.getFrame() < 5) {
-                    charMovement.setAnimation(student.getAnimation()[2]);
+                    charMovement.setAnimation(sprite.getAnimation()[2]);
                     charMovement.setFrame(charMovement.getFrame() + 1);
                 } else if (charMovement.getFrame() >= 5 && charMovement.getFrame() < 10) {
-                    charMovement.setAnimation(student.getAnimation()[3]);
+                    charMovement.setAnimation(sprite.getAnimation()[3]);
                     charMovement.setFrame(charMovement.getFrame() + 1);
                 } else if (charMovement.getFrame() > 9) {
                     charMovement.setFrame(0);
                 }
-                student.x = student.x - (int) tempLeftRight;
+                sprite.x = sprite.x - (int) tempLeftRight;
             } else if (ke.getKeyCode() == KeyEvent.VK_UP || ke.getKeyCode() == KeyEvent.VK_W) {
                 if (charMovement.getFrame() < 5) {
-                    charMovement.setAnimation(student.getAnimation()[4]);
+                    charMovement.setAnimation(sprite.getAnimation()[4]);
                     charMovement.setFrame(charMovement.getFrame() + 1);
                 } else if (charMovement.getFrame() >= 5 && charMovement.getFrame() < 10) {
-                    charMovement.setAnimation(student.getAnimation()[5]);
+                    charMovement.setAnimation(sprite.getAnimation()[5]);
                     charMovement.setFrame(charMovement.getFrame() + 1);
                 } else if (charMovement.getFrame() > 9) {
                     charMovement.setFrame(0);
                 }
-                student.y = student.y - (int) tempUpDown;
+                sprite.y = sprite.y - (int) tempUpDown;
             } else if (ke.getKeyCode() == KeyEvent.VK_DOWN || ke.getKeyCode() == KeyEvent.VK_S) {
                 if (charMovement.getFrame() < 5) {
-                    charMovement.setAnimation(student.getAnimation()[6]);
+                    charMovement.setAnimation(sprite.getAnimation()[6]);
                     charMovement.setFrame(charMovement.getFrame() + 1);
                 } else if (charMovement.getFrame() >= 5 && charMovement.getFrame() < 10) {
-                    charMovement.setAnimation(student.getAnimation()[7]);
+                    charMovement.setAnimation(sprite.getAnimation()[7]);
                     charMovement.setFrame(charMovement.getFrame() + 1);
                 } else if (charMovement.getFrame() > 9) {
                     charMovement.setFrame(0);
                 }
-                student.y = student.y + (int) tempUpDown;
+                sprite.y = sprite.y + (int) tempUpDown;
             }
 
             /*
@@ -278,9 +281,9 @@ public class ABPController {
             }
             abp.refreshStations();
             for (Rectangle station : abp.getStations()) {
-                if (student.intersects(station)) {
-                    student.x = oldX;
-                    student.y = oldY;
+                if (sprite.intersects(station)) {
+                    sprite.x = oldX;
+                    sprite.y = oldY;
 
                     charMovement.setIsInteracting(true);
                     charMovement.setFacing(charMovement.getAnimation());
@@ -375,7 +378,7 @@ public class ABPController {
         public void componentResized(ComponentEvent ce) {
             
             JFrame placeHolder = (JFrame) ce.getSource();
-            student.setBounds(placeHolder.getWidth()-student.width*2,Math.round(placeHolder.getHeight()-student.height*2.5f),student.width,student.height);
+            sprite.setBounds(placeHolder.getWidth()-sprite.width*2,Math.round(placeHolder.getHeight()-sprite.height*2.5f),sprite.width,sprite.height);
         }
 
         @Override
