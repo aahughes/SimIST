@@ -1,7 +1,10 @@
 
 package entities;
 
+import java.awt.Dimension;
 import java.util.ArrayList;
+import models.CharacterSprite;
+import views.TestFrame;
 
 public class Person {
     private String fName;
@@ -9,7 +12,7 @@ public class Person {
     private int age;
     private ArrayList<String> fnames = new ArrayList<String>();
     private ArrayList<String> lnames = new ArrayList<String>();
-
+    private static CharacterSprite sprite;
     public Person(String fName, String lName, int age)
     {
         this.fName = fName;
@@ -24,6 +27,9 @@ public class Person {
      lnames.add("McFarland");
      lnames.add("Maimone");
      lnames.add("Smith");
+     
+     sprite = new CharacterSprite(new Dimension(800,600));
+     generateCharacters();
     }
     public void getInfo()
     {
@@ -31,8 +37,7 @@ public class Person {
     }
 
 
-    public static void main(String[] Args)
-    {
+    public static void generateCharacters(){
       Professor prof = new Professor("Dave", "Smith", 34, "Phd in IST", 68970);
       Student stud = new Student("Joey", "Williams", 20, 914987112, 3.1, "Junior");
       Visitor vis = new Visitor("Vincent", "Maimone", 20);
@@ -42,8 +47,11 @@ public class Person {
 //      vis.getInfo()；
 
     }
+    public CharacterSprite getSprite(){
+        return this.sprite;
+    }
 }
-
+    
 
 
 
