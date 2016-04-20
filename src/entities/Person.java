@@ -3,8 +3,8 @@ package entities;
 
 import java.awt.Dimension;
 import java.util.ArrayList;
+import models.CharacterInventory;
 import models.CharacterSprite;
-import views.TestFrame;
 
 public class Person {
     private String fName;
@@ -13,6 +13,8 @@ public class Person {
     private ArrayList<String> fnames = new ArrayList<String>();
     private ArrayList<String> lnames = new ArrayList<String>();
     private static CharacterSprite sprite;
+    private CharacterInventory inventory;
+    
     public Person(String fName, String lName, int age)
     {
         this.fName = fName;
@@ -29,14 +31,18 @@ public class Person {
      lnames.add("Smith");
      
      sprite = new CharacterSprite(new Dimension(800,600));
-     generateCharacters();
+     inventory = new CharacterInventory();
+     
     }
     public void getInfo()
     {
         System.out.println("First Name: " + this.fName + "Last Name: " + this.lName + " Age: " + this.age);
     }
 
-
+    public CharacterInventory getInventory(){
+        return this.inventory;
+    }
+    
     public static void generateCharacters(){
       Professor prof = new Professor("Dave", "Smith", 34, "Phd in IST", 68970);
       Student stud = new Student("Joey", "Williams", 20, 914987112, 3.1, "Junior");

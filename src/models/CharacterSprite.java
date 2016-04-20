@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ Sprite representing a Person, with alterable size.
+ Sprites / animation can be changed later if other, individualized sprites are available.
+
  */
 package models;
 

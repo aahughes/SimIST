@@ -49,7 +49,7 @@ public class ABPController {
         abp.setFocusable(true);
         randomize = new Randomize();
         menuPanel = new MenuPanel();
-        charInventory = new CharacterInventory();
+        charInventory = character.getInventory();
         inventory = new Inventory();
 
         testFrame.add(abp, BorderLayout.CENTER);
