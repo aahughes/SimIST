@@ -1,5 +1,5 @@
 /*
-ISTTime stores a LocalDateTime object with a default starting time at 4/1/2016 at 8:00.
+ISTTime stores a LocalDateTime object with a default starting time at Fri 4/1/2016 at 8:00.
 It contains methods to set and get the time and date, as well as format and display them.
  */
 package sandbox;
@@ -19,7 +19,7 @@ public class ISTTime {
 
 
     public ISTTime() throws ParseException{
-        this.now = LocalDateTime.of(2016,4,1,8,0);
+        this.now = LocalDateTime.of(2016,4,1,9,0);
     }
 
     public LocalTime getTime(){
@@ -39,11 +39,11 @@ public class ISTTime {
     }
 
     public String showDate(){
-        return now.format(DateTimeFormatter.ofPattern("d MMM uuuu"));
+        return now.format(DateTimeFormatter.ofPattern("EEE, dd MMM uuuu"));
     }
 
     public String showTime(){
-        return now.format(DateTimeFormatter.ofPattern("HH:mm"));
+        return now.format(DateTimeFormatter.ofPattern("hh:mm a"));
     }
     public int getMonthValue()
     {

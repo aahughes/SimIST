@@ -27,6 +27,7 @@ public class CharacterSprite extends Rectangle{
         return animation;
     }
     
+    @Override
     public void setSize(Dimension size){
         double tempHeight = size.height * .125;
         double tempWidth = size.width * .05;

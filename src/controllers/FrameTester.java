@@ -8,6 +8,9 @@ package controllers;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import views.*;
@@ -23,13 +26,12 @@ public class FrameTester {
     private JButton auBon;
     private JButton floor;
     private JButton meetingRoom;
-    private JButton clockPanel;
+    private ClockPanel clockPanel;
     private JButton room206;
     private JButton menuPanel;
     private JButton floor1;
     private JButton cybertorium;
 
-    private ClockPanel clock;
 
     public FrameTester() {
         frame = new TestFrame();
@@ -51,7 +53,11 @@ public class FrameTester {
         auBon = new JButton("Au Bon Pain");
         floor = new JButton("Floor");
         meetingRoom = new JButton("MeetingRoom");
-        clockPanel = new JButton("ClockPanel");
+        try {
+            clockPanel = new ClockPanel();
+        } catch (ParseException ex) {
+            Logger.getLogger(FrameTester.class.getName()).log(Level.SEVERE, null, ex);
+        }
         room206 = new JButton("Room 206");
         menuPanel = new JButton("MenuPanel");
         floor1 = new JButton("Floor 1");
@@ -69,7 +75,7 @@ public class FrameTester {
         auBon.addActionListener(new PanelSwitcher());
         floor.addActionListener(new PanelSwitcher());
         meetingRoom.addActionListener(new PanelSwitcher());
-        clockPanel.addActionListener(new PanelSwitcher());
+       // clockPanel.addActionListener(new PanelSwitcher());
         room206.addActionListener(new PanelSwitcher());
         menuPanel.addActionListener(new PanelSwitcher());
         floor1.addActionListener(new PanelSwitcher());
