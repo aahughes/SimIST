@@ -20,7 +20,7 @@ import sandbox.ClockControl;
  * @author Allison
  */
 public class ClockPanel extends JPanel implements ActionListener{
-    private ClockControl clock;
+    private ClockControl clockControl;
     private Timer updater;
     private JButton speedUpButton;
     private JButton slowDownButton;
@@ -30,14 +30,14 @@ public class ClockPanel extends JPanel implements ActionListener{
     
     
     public ClockPanel() throws ParseException{
-        this.clock = new ClockControl();
+        this.clockControl = new ClockControl();
         
-        String display = clock.display();
+        String display = clockControl.display();
         speedUpButton = new JButton("speed up");
         slowDownButton = new JButton("slow down");
         pauseButton = new JButton("pause");
-        timeDisplay = new JLabel(clock.display());
-        speedDisplay = new JLabel("Current Speed: " +Integer.toString(clock.getSpeed()));        
+        timeDisplay = new JLabel(clockControl.display());
+        speedDisplay = new JLabel("Current Speed: " +Integer.toString(clockControl.getSpeed()));        
         
         speedUpButton.addActionListener(this);
         slowDownButton.addActionListener(this);
@@ -59,13 +59,13 @@ public class ClockPanel extends JPanel implements ActionListener{
         Object o = e.getSource();
         
         if (o == speedUpButton)
-            clock.speedup();
+            clockControl.speedup();
         if (o == slowDownButton)
-            clock.slowdown();
+            clockControl.slowdown();
         if (o == pauseButton)
-            clock.pause();
+            clockControl.pause();
         
-        speedDisplay.setText("Current Speed: " +Integer.toString(clock.getSpeed()));  
+        speedDisplay.setText("Current Speed: " +Integer.toString(clockControl.getSpeed()));  
         speedDisplay.repaint();
     }
     
@@ -73,7 +73,7 @@ public class ClockPanel extends JPanel implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String display = clock.display();
+            String display = clockControl.display();
             timeDisplay.setText(display);
             timeDisplay.repaint();
             
